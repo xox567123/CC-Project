@@ -1,0 +1,1420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Career Connections — Personal Budget Plan</title>
+
+  <style>
+    :root {
+      --cream: #fff8ef;
+      --paper: rgba(255, 255, 255, 0.72);
+      --orange: #ff9f43;
+      --gold: #ffd166;
+      --dark-orange: #e76f24;
+      --brown: #32170d;
+      --muted-brown: #795548;
+      --white: #ffffff;
+      --red: #a3142f;
+      --blue: #11698e;
+      --green: #27865a;
+      --shadow: rgba(50, 23, 13, 0.18);
+      --soft-shadow: rgba(255, 159, 67, 0.28);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      overflow: hidden;
+      color: var(--brown);
+      font-family: Inter, Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at 20% 10%, rgba(255, 209, 102, 0.24), transparent 28%),
+        radial-gradient(circle at 85% 85%, rgba(17, 105, 142, 0.18), transparent 30%),
+        var(--cream);
+    }
+
+    button {
+      border: none;
+      cursor: pointer;
+      font: inherit;
+    }
+
+    .slideshow {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    .slideshow::before,
+    .slideshow::after {
+      position: absolute;
+      z-index: -1;
+      width: 420px;
+      height: 420px;
+      border-radius: 50%;
+      content: "";
+      filter: blur(8px);
+      opacity: 0.38;
+      pointer-events: none;
+      animation: orbFloat 12s ease-in-out infinite alternate;
+    }
+
+    .slideshow::before {
+      top: -140px;
+      right: -100px;
+      background: radial-gradient(circle, rgba(255, 159, 67, 0.55), transparent 68%);
+    }
+
+    .slideshow::after {
+      bottom: -160px;
+      left: -120px;
+      background: radial-gradient(circle, rgba(17, 105, 142, 0.38), transparent 68%);
+      animation-delay: -4s;
+    }
+
+    .ambient-lines {
+      position: fixed;
+      z-index: -1;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .ambient-lines span {
+      position: absolute;
+      display: block;
+      width: 260px;
+      height: 1px;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 159, 67, 0.5),
+        transparent
+      );
+      transform: rotate(-35deg);
+      animation: lineDrift 11s linear infinite;
+    }
+
+    .ambient-lines span:nth-child(1) {
+      top: 18%;
+      left: -20%;
+      animation-delay: -2s;
+    }
+
+    .ambient-lines span:nth-child(2) {
+      top: 48%;
+      left: 65%;
+      animation-delay: -6s;
+    }
+
+    .ambient-lines span:nth-child(3) {
+      top: 78%;
+      left: 8%;
+      animation-delay: -9s;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6vw;
+      visibility: hidden;
+      opacity: 0;
+      transform: translateX(90px) scale(0.94) rotateY(-4deg);
+      transition:
+        opacity 0.75s ease,
+        transform 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+        visibility 0.75s ease;
+      perspective: 1200px;
+      background:
+        radial-gradient(circle at 86% 12%, rgba(255, 159, 67, 0.28), transparent 23%),
+        radial-gradient(circle at 8% 92%, rgba(255, 209, 102, 0.26), transparent 25%);
+    }
+
+    .slide::before {
+      position: absolute;
+      inset: 5%;
+      border: 1px solid rgba(231, 111, 36, 0.1);
+      border-radius: 42px;
+      content: "";
+      pointer-events: none;
+    }
+
+    .slide.active {
+      z-index: 2;
+      visibility: visible;
+      opacity: 1;
+      transform: translateX(0) scale(1) rotateY(0);
+    }
+
+    .slide.previous {
+      transform: translateX(-90px) scale(0.94) rotateY(4deg);
+    }
+
+    .slide.active .content {
+      animation: contentEnter 0.85s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    .content {
+      position: relative;
+      z-index: 1;
+      width: min(1120px, 94vw);
+      max-height: 88vh;
+      overflow-y: auto;
+      padding: clamp(24px, 4vw, 56px);
+      text-align: center;
+      scrollbar-width: thin;
+      scrollbar-color: var(--orange) transparent;
+    }
+
+    .content::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .content::-webkit-scrollbar-thumb {
+      border-radius: 999px;
+      background: var(--orange);
+    }
+
+    .slide-number {
+      position: absolute;
+      top: 32px;
+      left: 38px;
+      z-index: 3;
+      color: var(--dark-orange);
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: 3px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+      color: var(--dark-orange);
+      font-size: clamp(12px, 1.4vw, 17px);
+      font-weight: 900;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before,
+    .eyebrow::after {
+      width: 34px;
+      height: 2px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, transparent, var(--orange));
+      content: "";
+    }
+
+    .eyebrow::after {
+      background: linear-gradient(90deg, var(--orange), transparent);
+    }
+
+    h1,
+    h2,
+    h3 {
+      text-wrap: balance;
+    }
+
+    h1 {
+      margin-bottom: 22px;
+      color: var(--brown);
+      font-size: clamp(52px, 10vw, 132px);
+      font-weight: 950;
+      letter-spacing: -6px;
+      line-height: 0.88;
+      text-shadow:
+        0 8px 0 rgba(231, 111, 36, 0.08),
+        0 16px 35px rgba(50, 23, 13, 0.12);
+    }
+
+    h2 {
+      margin-bottom: 28px;
+      color: var(--brown);
+      font-size: clamp(38px, 5.6vw, 78px);
+      font-weight: 900;
+      letter-spacing: -3px;
+      line-height: 0.95;
+    }
+
+    h3 {
+      margin-bottom: 14px;
+      color: var(--dark-orange);
+      font-size: clamp(24px, 3vw, 38px);
+    }
+
+    p {
+      max-width: 900px;
+      margin: 0 auto;
+      font-size: clamp(18px, 2.1vw, 28px);
+      line-height: 1.55;
+    }
+
+    .editable {
+      color: var(--dark-orange);
+    }
+
+    .subtitle {
+      color: var(--dark-orange);
+      font-size: clamp(21px, 3vw, 36px);
+      font-weight: 900;
+      letter-spacing: 1px;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+      margin-top: 36px;
+    }
+
+    .card-grid.two-columns {
+      grid-template-columns: repeat(2, 1fr);
+      max-width: 900px;
+      margin-right: auto;
+      margin-left: auto;
+    }
+
+    .card,
+    .review-box,
+    .story-step {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.78);
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.84), rgba(255, 247, 237, 0.55)),
+        var(--paper);
+      box-shadow:
+        0 18px 50px var(--shadow),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
+
+    .card {
+      min-height: 180px;
+      padding: 30px 24px;
+      border-radius: 28px;
+      text-align: left;
+      transition:
+        transform 0.35s ease,
+        box-shadow 0.35s ease,
+        border-color 0.35s ease;
+    }
+
+    .card:hover,
+    .story-step:hover {
+      border-color: rgba(255, 159, 67, 0.72);
+      box-shadow:
+        0 22px 55px rgba(50, 23, 13, 0.2),
+        0 0 30px var(--soft-shadow);
+      transform: translateY(-10px) rotateX(2deg);
+    }
+
+    .card strong {
+      position: relative;
+      z-index: 1;
+      display: block;
+      margin-bottom: 12px;
+      color: var(--dark-orange);
+      font-size: 26px;
+    }
+
+    .card span {
+      position: relative;
+      z-index: 1;
+      display: block;
+      color: var(--brown);
+      font-size: 18px;
+      line-height: 1.55;
+    }
+
+    .quote {
+      position: relative;
+      max-width: 900px;
+      margin: 36px auto 0;
+      padding: 30px 34px 30px 40px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      border-left: 7px solid var(--orange);
+      border-radius: 0 26px 26px 0;
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(255, 247, 237, 0.58));
+      box-shadow: 0 16px 42px var(--shadow);
+      font-size: clamp(21px, 3vw, 38px);
+      font-style: italic;
+      line-height: 1.38;
+      backdrop-filter: blur(15px);
+    }
+
+    .timeline {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 14px;
+      margin-top: 34px;
+    }
+
+    .timeline span {
+      padding: 14px 22px;
+      border: 1px solid rgba(255, 255, 255, 0.65);
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--orange), #ffbd69);
+      color: var(--brown);
+      font-weight: 900;
+      box-shadow: 0 9px 22px rgba(231, 111, 36, 0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .timeline span:hover {
+      box-shadow: 0 14px 30px rgba(231, 111, 36, 0.32);
+      transform: translateY(-5px) scale(1.04);
+    }
+
+    .story-map {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      max-width: 980px;
+      margin: 34px auto 0;
+    }
+
+    .story-step {
+      padding: 24px;
+      border-radius: 24px;
+      text-align: left;
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+    }
+
+    .story-step span {
+      display: inline-block;
+      margin-bottom: 12px;
+      padding: 7px 14px;
+      border-radius: 999px;
+      background: var(--orange);
+      color: var(--brown);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .story-step p {
+      font-size: 18px;
+    }
+
+    .review-box {
+      max-width: 900px;
+      margin: 32px auto 0;
+      padding: 38px;
+      border-radius: 32px;
+    }
+
+    .budget-total {
+      color: var(--green) !important;
+      font-size: 30px !important;
+      font-weight: 900;
+    }
+
+    .progress {
+      position: fixed;
+      z-index: 30;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 5px;
+      background: linear-gradient(90deg, var(--blue), var(--orange), var(--red));
+      box-shadow: 0 0 16px rgba(231, 111, 36, 0.55);
+      transition: width 0.45s ease;
+    }
+
+    .presentation-timer {
+      position: fixed;
+      z-index: 90;
+      top: 18px;
+      right: 22px;
+      min-width: 92px;
+      padding: 8px 12px;
+      border: 1px solid rgba(255, 255, 255, 0.65);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.72);
+      color: var(--brown);
+      font-size: 18px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      text-align: center;
+      box-shadow: 0 8px 22px rgba(50, 23, 13, 0.18);
+      backdrop-filter: blur(14px);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-8px);
+      transition: opacity 0.4s ease, visibility 0.4s ease, transform 0.4s ease;
+    }
+
+    .presentation-timer.visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .presentation-timer.warning {
+      background: rgba(255, 209, 102, 0.92);
+    }
+
+    .presentation-timer.finished {
+      background: var(--red);
+      color: var(--white);
+      animation: timerPulse 1s ease-in-out infinite;
+    }
+
+    .start-screen {
+      position: fixed;
+      z-index: 100;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 50% 48%, rgba(163, 20, 47, 0.33), transparent 30%),
+        linear-gradient(135deg, #180108, #410510 50%, #170207);
+      transition: opacity 0.8s ease, visibility 0.8s ease;
+    }
+
+    .start-screen.hidden {
+      visibility: hidden;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .start-content {
+      position: relative;
+      z-index: 5;
+      padding: 30px;
+      text-align: center;
+      color: var(--white);
+    }
+
+    .start-content h1 {
+      color: var(--white);
+      font-size: clamp(45px, 8vw, 100px);
+      letter-spacing: -4px;
+    }
+
+    .start-content p {
+      margin-bottom: 30px;
+      color: #ffdada;
+      font-size: clamp(17px, 2.5vw, 28px);
+    }
+
+    .start-button {
+      padding: 17px 32px;
+      border: 1px solid rgba(255, 209, 102, 0.45);
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--red), #dd2948);
+      color: var(--white);
+      font-size: 19px;
+      font-weight: 900;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .start-button:hover {
+      background: linear-gradient(135deg, #d62045, #ff4663);
+    }
+
+    .curtain {
+      position: absolute;
+      z-index: 3;
+      top: 0;
+      width: 51%;
+      height: 100%;
+      background:
+        repeating-linear-gradient(
+          90deg,
+          #3d040c 0%,
+          #700914 8%,
+          #b71d35 16%,
+          #650711 25%,
+          #a3142f 33%,
+          #47040c 43%
+        );
+      box-shadow: inset 0 0 70px rgba(0, 0, 0, 0.75);
+      transition: transform 2.15s cubic-bezier(0.7, 0, 0.2, 1);
+    }
+
+    .curtain.left {
+      left: 0;
+    }
+
+    .curtain.right {
+      right: 0;
+    }
+
+    .start-screen.opening .curtain.left {
+      transform: translateX(-101%);
+    }
+
+    .start-screen.opening .curtain.right {
+      transform: translateX(101%);
+    }
+
+    .start-screen.opening .start-content {
+      opacity: 0;
+      transform: scale(0.86);
+      transition: opacity 0.5s ease, transform 0.7s ease;
+    }
+
+    @keyframes contentEnter {
+      from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.98);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    @keyframes orbFloat {
+      from {
+        transform: translate3d(0, 0, 0) scale(1);
+      }
+
+      to {
+        transform: translate3d(-50px, 35px, 0) scale(1.12);
+      }
+    }
+
+    @keyframes lineDrift {
+      from {
+        opacity: 0;
+        transform: translateX(-20vw) rotate(-35deg);
+      }
+
+      25%,
+      75% {
+        opacity: 0.8;
+      }
+
+      to {
+        opacity: 0;
+        transform: translateX(120vw) rotate(-35deg);
+      }
+    }
+
+    @keyframes timerPulse {
+      0%,
+      100% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.08);
+      }
+    }
+
+    @media (max-width: 760px) {
+      body {
+        overflow: auto;
+      }
+
+      .slideshow {
+        min-height: 100vh;
+        height: auto;
+      }
+
+      .slide {
+        position: relative;
+        min-height: 100vh;
+        padding: 65px 18px 80px;
+      }
+
+      .content {
+        max-height: none;
+        overflow: visible;
+        padding: 28px 12px;
+      }
+
+      .card-grid,
+      .card-grid.two-columns,
+      .story-map {
+        grid-template-columns: 1fr;
+        gap: 15px;
+      }
+
+      .card {
+        min-height: auto;
+        padding: 24px 20px;
+      }
+
+      .quote {
+        padding: 25px 22px 25px 30px;
+      }
+
+      .slide-number {
+        top: 20px;
+        left: 22px;
+      }
+
+      .presentation-timer {
+        top: 12px;
+        right: 14px;
+        min-width: 82px;
+        padding: 7px 10px;
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="start-screen" id="startScreen">
+    <div class="curtain left"></div>
+    <div class="curtain right"></div>
+
+    <div class="start-content">
+      <h1>Career Connections</h1>
+      <p>Personal Budget and Financial Independence Plan</p>
+      <button class="start-button" id="startButton">
+        Begin Presentation
+      </button>
+    </div>
+  </div>
+
+  <div class="slideshow">
+    <div class="ambient-lines">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <div class="progress" id="progress"></div>
+
+    <div
+      class="presentation-timer"
+      id="presentationTimer"
+      aria-live="polite"
+      aria-label="Presentation timer"
+    >
+      5:00
+    </div>
+
+    <!-- Slide 1 -->
+    <section class="slide active">
+      <span class="slide-number">01 / 17</span>
+
+      <div class="content">
+        <div class="eyebrow">Career Connections</div>
+        <h1>My Financial Future</h1>
+        <p class="subtitle">A Personal Budget Plan</p>
+
+        <div class="quote">
+          Building a realistic plan for work, independence, and long-term goals.
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 2 -->
+    <section class="slide">
+      <span class="slide-number">02 / 17</span>
+
+      <div class="content">
+        <div class="eyebrow">Career Goal</div>
+        <h2>My Future Career</h2>
+
+        <div class="card-grid two-columns">
+          <div class="card">
+            <strong>Career Field</strong>
+            <span>
+              My goal is to build a stable career that supports my needs,
+              future plans, and personal growth.
+            </span>
+          </div>
+
+          <div class="card">
+            <strong>Why It Matters</strong>
+            <span>
+              A career gives me income, experience, independence, and the
+              ability to plan for the future.
+            </span>
+          </div>
+        </div>
+
+        <div class="quote">
+          Financial independence begins with understanding where my money goes.
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 3 -->
+    <section class="slide">
+      <span class="slide-number">03 / 17</span>
+
+      <div class="content">
+        <div class="eyebrow">Income Plan</div>
+        <h2>Expected Monthly Income</h2>
+
+        <div class="card-grid two-columns">
+          <div class="card">
+            <strong>Estimated Take-Home Pay</strong>
+            <span>
+              $3,500 per month after taxes and other payroll deductions.
+            </span>
+          </div>
+
+          <div class="card">
+            <strong>Income Priorities</strong>
+            <span>
+              Pay necessities first, save consistently, invest for the future,
+              and leave room for healthy spending.
+            </span>
+          </div>
+        </div>
+
+        <div class="quote budget-total">
+          Monthly income goal: $3,500
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 4 -->
+    <section class="slide">
+      <span class="slide-number">04 / 17</span>
+
+      <div class="content">
+        <div class="eyebrow">Housing</div>
+        <h2>Rent, Utilities, and Insurance</h2>
+
+        <div class="card-grid">
+          <div class="card">
+            <strong>Rent</strong>
+            <span>
+              $1,100 monthly for a safe and affordable place to live.
+            </span>
+          </div>
+
+          <div class="card">
+            <strong>Utilities</strong>
+            <span>
+              $180 monthly for electricity, water, heating, and other basic
+              household services.
+            </span>
+          </div>
+
+          <div class="card">
+            <strong>Renters Insurance</strong>
+            <span>
+              $25 monthly to help protect personal belongings and provide
+              liability coverage.
+            </span>
+          </div>
+        </div>
+
+        <div class="quote budget-total">
+          Housing total: $1,305 per month
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 5 -->
+    <section class="slide">
+      <span class="slide-number">05 / 17</span>
+
+      <div class="content">
+        <div class="eyebrow">Transportation</div>
+        <h2>Car and Transportation Costs</h2>
+
+        <div class="card-grid">
+          <div class="card">
+            <strong>Car Payment</strong>
+            <span>
+              $350 monthly for a dependable vehicle.
+            </span>
+          </div>
+
+          <div class="card">
+            <strong>Car Insurance</strong>
+            <span>
+              $160 monthly for required auto insurance coverage.
+            </span>
+          </div>
+
+          <div class="card">
+            <strong>Gas and Maintenance</strong>
+            <span>
+              $220 monthly for fuel, oil changes, repairs, and maintenance.
+            </span>
+          </div>
+        </div>
+
+        <div class="quote budget-total">
+          Transportation total: $730 per month
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 6 -->
+    <section class="slide">
+      <span class="slide-number">06 / 17</span>
+
+      <div class="content">
+        <div class="eyebrow">Daily Needs</div>
+        <h2>Food and Essentials</h2>
+
+        <div class="card-grid two-columns">
+          <div class="card">
+            <strong>Food</strong>
+            <span>
+              $450 monthly for groceries, meals, and basic kitchen supplies.
+            </span>
+          </div>
+
+          <div class="card">
+            <strong>Household Essentials</strong>
+            <span>
+              $150 monthly for toiletries, cleaning supplies, clothing, and
+              other necessary purchases.
+            </span>
+          </div>
+        </div>
+
+        <div class="quote budget-total">
+          Food and essentials total: $600 per month
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 7 -->
+    <section class="slide">
+      <span class="slide-number">07 / 17</span>
+
+      <div class="content">
+        <div class="eyebrow">Communication</div>
+        <h2>Cell Phone and Internet</h2>
+
+        <div class="card-grid two-columns">
+          <div class="card">
+            <strong>Cell Phone</strong>
+            <span>
+              $80 monthly for a reliable phone plan used for work, school, and
+              communication.
+            </span>
+          </div>
+
+          <div class="card">
+            <strong>Internet</strong>
+            <span>
+              $70 monthly for internet access needed for work, career research,
+              bills, and personal use.
+            </span>
+          </div>
+        </div>
+
+        <div class="quote budget-total">
+          Communication total: $150 per month
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 8 -->
+    <section class="slide">
+      <span class="slide-number">08 / 17</span>
+
+      <div class="content">
+        <div class="eyebrow">Health</div>
+        <h2>Health and Wellness</h2>
+
+        <div class="card-grid two-columns">
+          <div class="card">
+            <strong>Health Costs</strong>
+            <span>
+              $250 monthly for health insurance, prescriptions, appointments,
+              and other medical expenses.
+            </span>
+          </div>
+
+          <div class="card">
+            <strong>Why It Matters</strong>
+            <span>
+              Planning for health expenses helps prevent unexpected medical
+              bills from damaging the rest of my budget.
+            </span>
+          </div>
+        </div>
+
+        <div class="quote budget-total">
+          Health budget: $250 per month
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 9 -->
+    <section class="slide">
+      <span class="slide-number">09 / 17</span>
+
+      <div class="content">
+        <div class="eyebrow">Personal Balance</div>
+        <h2>Entertainment</h2>
+
+        <div class="card-grid two-columns">
+          <div class="card">
+            <strong>Entertainment Budget</strong>
+            <span>
+              $150 monthly for hobbies, movies, music, games, restaurants, and
+              activities with friends.
+            </span>
+          </div>
+
+          <div class="card">
+            <strong>Responsible Spending</strong>
+            <span>
+              Entertainment is included, but it stays within a limit so that
+              necessities and savings come first.
+            </span>
+          </div>
+        </div>
+
+        <div class="quote budget-total">
+          Entertainment budget: $150 per month
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 10 -->
+    <section class="slide">
+      <span class="slide-number">10 / 17</span>
+
+      <div class="content">
+        <div class="eyebrow">Long-Term Goals</div>
+        <h2>Investments and Down Payment</h2>
+
+        <div class="card-grid two-columns">
+          <div class="card">
+            <strong>Investments</strong>
+            <span>
+              $200 monthly toward retirement or another long-term investment
+              account.
+            </span>
+          </div>
+
+          <div class="card">
+            <strong>Down Payment Fund</strong>
+            <span>
+              $200 monthly saved for a future home, apartment, or major
+              purchase.
+            </span>
+          </div>
+        </div>
+
+        <div class="quote budget-total">
+          Long-term savings total: $400 per month
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 11 -->
+    <section class="slide">
+      <span class="slide-number">11 / 17</span>
+
+      <div class="content">
+        <div class="eyebrow">Financial Protection</div>
+        <h2>Rainy-Day Savings</h2>
+
+        <div class="card-grid two-columns">
+          <div class="card">
+            <strong>Monthly Contribution</strong>
+            <span>
+              $200 monthly until I build an emergency fund.
+            </span>
+          </div>
+
+          <div class="card">
+            <strong>Purpose</strong>
+            <span>
+              This money can help with job changes, repairs, emergencies, or
+              unexpected bills.
+            </span>
+          </div>
+        </div>
+
+        <div class="quote">
+          My goal is to save enough to cover at least three to six months of
+          essential expenses.
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 12 -->
+    <section class="slide">
+      <span class="slide-number">12 / 17</span>
+
+      <div class="content">
+        <div class="eyebrow">Monthly Budget</div>
+        <h2>Where My Money Goes</h2>
+
+        <div class="story-map">
+          <div class="story-step">
+            <span>Income</span>
+            <p>$3,500 monthly take-home pay.</p>
+          </div>
+
+          <div class="story-step">
+            <span>Housing</span>
+            <p>$1,305 for rent, utilities, and renters insurance.</p>
+          </div>
+
+          <div class="story-step">
+            <span>Transportation</span>
+            <p>$730 for the car, insurance, gas, and maintenance.</p>
+          </div>
+
+          <div class="story-step">
+            <span>Daily Needs</span>
+            <p>$600 for food and essential purchases.</p>
+          </div>
+
+          <div class="story-step">
+            <span>Communication and Health</span>
+            <p>$400 for phone, internet, and health expenses.</p>
+          </div>
+
+          <div class="story-step">
+            <span>Goals and Balance</span>
+            <p>$950 for entertainment, investments, down payment, and rainy-day savings.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 13 -->
+    <section class="slide">
+      <span class="slide-number">13 / 17</span>
+
+      <div class="content">
+        <div class="eyebrow">Budget Check</div>
+        <h2>My Monthly Total</h2>
+
+        <div class="card-grid">
+          <div class="card">
+            <strong>Monthly Income</strong>
+            <span>$3,500</span>
+          </div>
+
+          <div class="card">
+            <strong>Monthly Expenses</strong>
+            <span>$3,485</span>
+          </div>
+
+          <div class="card">
+            <strong>Remaining Cushion</strong>
+            <span>$15</span>
+          </div>
+        </div>
+
+        <div class="quote budget-total">
+          Every dollar has a purpose, and the budget stays within my income.
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 14 -->
+    <section class="slide">
+      <span class="slide-number">14 / 17</span>
+
+      <div class="content">
+        <div class="eyebrow">Smart Choices</div>
+        <h2>How I Will Stay on Track</h2>
+
+        <div class="timeline">
+          <span>Track spending weekly</span>
+          <span>Use a monthly budget</span>
+          <span>Pay bills on time</span>
+          <span>Automate savings</span>
+          <span>Limit impulse purchases</span>
+        </div>
+
+        <div class="quote">
+          A budget only works if I review it regularly and adjust it when my
+          income or expenses change.
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 15 -->
+    <section class="slide">
+      <span class="slide-number">15 / 17</span>
+
+      <div class="content">
+        <div class="eyebrow">Career Connection</div>
+        <h2>How My Career Supports My Plan</h2>
+
+        <div class="card-grid two-columns">
+          <div class="card">
+            <strong>Reliable Income</strong>
+            <span>
+              A steady career makes it easier to pay bills, save money, and plan
+              for larger goals.
+            </span>
+          </div>
+
+          <div class="card">
+            <strong>Future Growth</strong>
+            <span>
+              Experience, raises, certifications, and promotions can increase
+              my ability to save and invest.
+            </span>
+          </div>
+        </div>
+
+        <div class="quote">
+          My career goal and financial goal work together: earning more gives
+          me more opportunities to build a secure future.
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 16 -->
+    <section class="slide">
+      <span class="slide-number">16 / 17</span>
+
+      <div class="content">
+        <div class="eyebrow">Future Goals</div>
+        <h2>What I Want to Accomplish</h2>
+
+        <div class="card-grid">
+          <div class="card">
+            <strong>Short Term</strong>
+            <span>
+              Pay bills on time, avoid unnecessary debt, and build a starter
+              emergency fund.
+            </span>
+          </div>
+
+          <div class="card">
+            <strong>Medium Term</strong>
+            <span>
+              Save for a down payment, improve my credit, and continue growing
+              in my career.
+            </span>
+          </div>
+
+          <div class="card">
+            <strong>Long Term</strong>
+            <span>
+              Own a home, invest consistently, and have enough savings to feel
+              financially secure.
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 17 -->
+    <section class="slide">
+      <span class="slide-number">17 / 17</span>
+
+      <div class="content">
+        <div class="eyebrow">Final Reflection</div>
+        <h2>My Financial Future</h2>
+
+        <div class="review-box">
+          <h3>Career Connections Project</h3>
+
+          <p>
+            This budget shows how I can use a future career to support my
+            responsibilities, protect myself from emergencies, and work toward
+            larger goals.
+          </p>
+
+          <div class="quote budget-total">
+            Earn responsibly. Spend wisely. Save consistently.
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    const startScreen = document.getElementById("startScreen");
+    const startButton = document.getElementById("startButton");
+
+    const slides = document.querySelectorAll(".slide");
+    const progress = document.getElementById("progress");
+    const presentationTimer = document.getElementById("presentationTimer");
+
+    let currentSlide = 0;
+    let autoPlay = null;
+    let presentationStarted = false;
+    let touchStartX = 0;
+    let timerInterval = null;
+
+    const TIMER_DURATION = 5 * 60;
+    let remainingSeconds = TIMER_DURATION;
+
+    function formatTime(totalSeconds) {
+      const minutes = Math.floor(totalSeconds / 60);
+      const seconds = totalSeconds % 60;
+
+      return `${minutes}:${String(seconds).padStart(2, "0")}`;
+    }
+
+    function updateTimer() {
+      presentationTimer.textContent = formatTime(remainingSeconds);
+
+      if (remainingSeconds <= 30 && remainingSeconds > 0) {
+        presentationTimer.classList.add("warning");
+      }
+
+      if (remainingSeconds <= 0) {
+        presentationTimer.textContent = "0:00";
+        presentationTimer.classList.remove("warning");
+        presentationTimer.classList.add("finished");
+        clearInterval(timerInterval);
+      }
+    }
+
+    function startTimer() {
+      clearInterval(timerInterval);
+
+      remainingSeconds = TIMER_DURATION;
+      presentationTimer.classList.remove("warning", "finished");
+      presentationTimer.classList.add("visible");
+      updateTimer();
+
+      timerInterval = setInterval(() => {
+        remainingSeconds -= 1;
+        updateTimer();
+      }, 1000);
+    }
+
+    function showSlide(index) {
+      if (index < 0) {
+        index = slides.length - 1;
+      }
+
+      if (index >= slides.length) {
+        index = 0;
+      }
+
+      slides.forEach((slide, slideIndex) => {
+        slide.classList.remove("active", "previous");
+
+        if (slideIndex < index) {
+          slide.classList.add("previous");
+        }
+      });
+
+      slides[index].classList.add("active");
+
+      progress.style.width =
+        `${((index + 1) / slides.length) * 100}%`;
+
+      currentSlide = index;
+    }
+
+    function nextSlide() {
+      showSlide(currentSlide + 1);
+    }
+
+    function previousSlide() {
+      showSlide(currentSlide - 1);
+    }
+
+    function startAutoPlay() {
+      clearInterval(autoPlay);
+
+      // 150 seconds per slide.
+      autoPlay = setInterval(nextSlide, 150000);
+    }
+
+    function restartAutoPlay() {
+      if (presentationStarted) {
+        startAutoPlay();
+      }
+    }
+
+    function startPresentation() {
+      if (presentationStarted) return;
+
+      presentationStarted = true;
+      startTimer();
+      startScreen.classList.add("opening");
+
+      setTimeout(() => {
+        startScreen.classList.add("hidden");
+        showSlide(0);
+        startAutoPlay();
+      }, 2150);
+    }
+
+    startButton.addEventListener("click", startPresentation);
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" && !presentationStarted) {
+        startPresentation();
+        return;
+      }
+
+      if (!presentationStarted) return;
+
+      if (event.key === "ArrowRight" || event.key === " ") {
+        event.preventDefault();
+        nextSlide();
+        restartAutoPlay();
+      }
+
+      if (event.key === "ArrowLeft") {
+        event.preventDefault();
+        previousSlide();
+        restartAutoPlay();
+      }
+
+      if (event.key === "Home") {
+        showSlide(0);
+        restartAutoPlay();
+      }
+
+      if (event.key === "End") {
+        showSlide(slides.length - 1);
+        restartAutoPlay();
+      }
+    });
+
+    document.addEventListener("touchstart", (event) => {
+      touchStartX = event.changedTouches[0].screenX;
+    });
+
+    document.addEventListener("touchend", (event) => {
+      if (!presentationStarted) return;
+
+      const touchEndX = event.changedTouches[0].screenX;
+      const distance = touchStartX - touchEndX;
+
+      if (Math.abs(distance) > 50) {
+        if (distance > 0) {
+          nextSlide();
+        } else {
+          previousSlide();
+        }
+
+        restartAutoPlay();
+      }
+    });
+
+    showSlide(0);
+  </script>
+</body>
+</html>
