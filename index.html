@@ -1225,6 +1225,82 @@ I wish to be a sergeant and have a home.
         </div>
       </div>
     </section>
+
+    <!-- Slide 18 -->
+    <section class="slide">
+      <span class="slide-number">18 / 20</span>
+
+      <div class="content">
+        <div class="eyebrow">Normal Budget</div>
+        <h2>Normal Budget</h2>
+
+        <div class="story-map">
+          <div class="story-step"><span>Income</span><p>Monthly: $6,613 · Annual: $79,356</p></div>
+          <div class="story-step"><span>Home</span><p>Monthly: $2,393.41 · Annual: $28,720.92</p></div>
+          <div class="story-step"><span>Food</span><p>Monthly: $496.08 · Annual: $5,952.96</p></div>
+          <div class="story-step"><span>Needs</span><p>Monthly: $29.64 · Annual: $355.68</p></div>
+          <div class="story-step"><span>Car-Loan/INS</span><p>Monthly: $300 · Annual: $3,600</p></div>
+          <div class="story-step"><span>Phone</span><p>Monthly: $68.88 · Annual: $826.56</p></div>
+          <div class="story-step"><span>Healthcare</span><p>Monthly: $300 · Annual: $3,600</p></div>
+          <div class="story-step"><span>Invest</span><p>Monthly: $1,000 · Annual: $12,000</p></div>
+          <div class="story-step"><span>Down Payment</span><p>Monthly: $1,500 · Annual: $18,000</p></div>
+          <div class="story-step"><span>Total Cost</span><p>Monthly: $6,088.01 · Annual: $73,056.12</p></div>
+          <div class="story-step"><span>Budget Left</span><p>Monthly: $525 · Annual: $6,299.88</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 19 -->
+    <section class="slide">
+      <span class="slide-number">19 / 20</span>
+
+      <div class="content">
+        <div class="eyebrow">Military Budget</div>
+        <h2>Military Budget</h2>
+
+        <div class="story-map">
+          <div class="story-step"><span>Car Insurance</span><p>$460</p></div>
+          <div class="story-step"><span>Phone</span><p>$68.88</p></div>
+          <div class="story-step"><span>Car</span><p>$227</p></div>
+          <div class="story-step"><span>Gas</span><p>$256</p></div>
+          <div class="story-step"><span>Investment</span><p>$400</p></div>
+          <div class="story-step"><span>Rainy Day Saving</span><p>$500</p></div>
+          <div class="story-step"><span>Down Payment</span><p>$1,167</p></div>
+          <div class="story-step"><span>Essentials</span><p>$1,011.88</p></div>
+          <div class="story-step"><span>Total</span><p>$3,078.88</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slide 20 -->
+    <section class="slide">
+      <span class="slide-number">20 / 20</span>
+
+      <div class="content">
+        <div class="eyebrow">Furnishing Costs</div>
+        <h2>Furnishing Costs</h2>
+
+        <div class="story-map">
+          <div class="story-step"><span>Table</span><p>$430</p></div>
+          <div class="story-step"><span>Storage</span><p>$200</p></div>
+          <div class="story-step"><span>Couch</span><p>$1,000</p></div>
+          <div class="story-step"><span>Bed Frame</span><p>$400</p></div>
+          <div class="story-step"><span>Nightstand</span><p>$90</p></div>
+          <div class="story-step"><span>Corner Kitchen</span><p>$850</p></div>
+          <div class="story-step"><span>Desk</span><p>$900</p></div>
+          <div class="story-step"><span>Mattress</span><p>$650</p></div>
+          <div class="story-step"><span>Dresser</span><p>$230</p></div>
+          <div class="story-step"><span>Sheets</span><p>$30</p></div>
+          <div class="story-step"><span>Pillow</span><p>$60</p></div>
+          <div class="story-step"><span>Blanket</span><p>$35</p></div>
+          <div class="story-step"><span>Comforter</span><p>$100</p></div>
+          <div class="story-step"><span>Cookware</span><p>$100</p></div>
+          <div class="story-step"><span>MicroWave</span><p>$200</p></div>
+          <div class="story-step"><span>Coffee Table</span><p>$300</p></div>
+          <div class="story-step"><span>Total</span><p>$5,575</p></div>
+        </div>
+      </div>
+    </section>
   </div>
 
   <script>
@@ -1234,6 +1310,13 @@ I wish to be a sergeant and have a home.
     const slides = document.querySelectorAll(".slide");
     const progress = document.getElementById("progress");
     const presentationTimer = document.getElementById("presentationTimer");
+
+    slides.forEach((slide, index) => {
+      const slideNumber = slide.querySelector(".slide-number");
+      if (slideNumber) {
+        slideNumber.textContent = `${String(index + 1).padStart(2, "0")} / ${slides.length}`;
+      }
+    });
 
     let currentSlide = 0;
     let autoPlay = null;
