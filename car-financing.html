@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Compare estimated 36-month car loan payments for a dream Porsche and a first car.">
+  <title>My Dream Car & First Car | 36-Month Loan Comparison</title>
+  <style>
+    :root { color-scheme: light; --ink: #1c2633; --muted: #64748b; --accent: #c65d32; --paper: #fffaf3; --line: #e8ded2; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--paper); color: var(--ink); font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    main { width: min(1120px, calc(100% - 32px)); margin: 0 auto; padding: 34px 0 64px; }
+    .back { color: var(--accent); font-weight: 700; text-decoration: none; }
+    header { padding: 36px 0 24px; }
+    .eyebrow { color: var(--accent); font-size: .78rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+    h1 { margin: 10px 0; font-size: clamp(2.2rem, 6vw, 4.5rem); letter-spacing: -.055em; line-height: 1; }
+    header p { max-width: 700px; color: var(--muted); font-size: 1.1rem; line-height: 1.6; }
+    .cars { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
+    .car { overflow: hidden; border: 1px solid var(--line); border-radius: 22px; background: #fff; box-shadow: 0 14px 40px #39230f12; }
+    .car img { display: block; width: 100%; height: 280px; object-fit: cover; background: #e9e9e9; }
+    .details { padding: 24px; }
+    .tag { display: inline-block; padding: 6px 10px; border-radius: 999px; background: #fff0e5; color: #8c3c1f; font-size: .78rem; font-weight: 800; }
+    h2 { margin: 12px 0 4px; font-size: 1.55rem; }
+    .price { color: var(--muted); margin: 0 0 20px; }
+    .payment { padding: 17px; border-radius: 14px; background: #f5f2ee; }
+    .payment small { display: block; color: var(--muted); font-weight: 700; text-transform: uppercase; letter-spacing: .06em; }
+    .monthly { display: block; margin-top: 5px; font-size: 2rem; font-weight: 900; letter-spacing: -.04em; }
+    .summary { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 16px; }
+    .summary div { padding: 12px 10px; border: 1px solid var(--line); border-radius: 12px; }
+    .summary small { display: block; color: var(--muted); font-size: .75rem; }
+    .summary strong { display: block; margin-top: 4px; font-size: .98rem; }
+    .assumptions { margin-top: 22px; padding: 22px; border-left: 4px solid var(--accent); border-radius: 8px; background: #fff; color: var(--muted); line-height: 1.6; }
+    .assumptions strong { color: var(--ink); }
+    label { display: inline-flex; align-items: center; gap: 8px; margin-top: 14px; color: var(--muted); font-size: .92rem; }
+    input { width: 76px; padding: 7px; border: 1px solid var(--line); border-radius: 8px; font: inherit; }
+    @media (max-width: 720px) { .cars { grid-template-columns: 1fr; } .car img { height: 230px; } .summary { grid-template-columns: 1fr 1fr; } }
+  </style>
+</head>
+<body>
+  <main>
+    <a class="back" href="index.html">← Back to my presentation</a>
+    <header>
+      <div class="eyebrow">My transportation goals</div>
+      <h1>Dream car vs. first car</h1>
+      <p>Here are the cars I’m dreaming about and considering for my first car, with an estimated 36-month loan payment for each.</p>
+      <label for="apr">Estimated APR <input id="apr" type="number" min="0" max="40" step="0.1" value="7">%</label>
+    </header>
+    <section class="cars" aria-label="Car and loan comparison">
+      <article class="car" data-price="229555">
+        <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=85" alt="Porsche 911 sports car, representing my dream car" loading="lazy">
+        <div class="details">
+          <span class="tag">My dream car</span>
+          <h2>Porsche 911</h2>
+          <p class="price">Listing price: <strong>$229,555</strong></p>
+          <div class="payment"><small>Estimated payment · 36 months</small><span class="monthly" aria-live="polite">—</span></div>
+          <div class="summary"><div><small>Amount financed*</small><strong class="principal">—</strong></div><div><small>Total of payments</small><strong class="total">—</strong></div><div><small>Interest estimate</small><strong class="interest">—</strong></div></div>
+        </div>
+      </article>
+      <article class="car" data-price="9900">
+        <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1200&q=85" alt="Silver sedan representing the 2017 Ford Focus SEL first-car listing" loading="lazy">
+        <div class="details">
+          <span class="tag">My first car</span>
+          <h2>2017 Ford Focus SEL</h2>
+          <p class="price">Listing price: <strong>$9,900</strong></p>
+          <div class="payment"><small>Estimated payment · 36 months</small><span class="monthly" aria-live="polite">—</span></div>
+          <div class="summary"><div><small>Amount financed*</small><strong class="principal">—</strong></div><div><small>Total of payments</small><strong class="total">—</strong></div><div><small>Interest estimate</small><strong class="interest">—</strong></div></div>
+        </div>
+      </article>
+    </section>
+    <aside class="assumptions"><strong>How this estimate works:</strong> Payments use the listing prices shown, a 36-month term, no down payment, and the APR entered above. Actual loan offers depend on credit, lender, down payment, taxes, title/registration, and other fees. Insurance, fuel, and maintenance are not included. The listing screenshots show $229,555 for the Porsche and $9,900 for the 2017 Ford Focus SEL. Photos are illustrative; confirm the exact vehicle and listing with the seller. A shorter loan means a much larger monthly payment, especially for the dream car.</aside>
+  </main>
+  <script>
+    const termMonths = 36;
+    const aprInput = document.getElementById('apr');
+    const money = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
+    function updateEstimates() {
+      const annualRate = Math.max(0, Number(aprInput.value) || 0) / 100;
+      const monthlyRate = annualRate / 12;
+      document.querySelectorAll('.car').forEach((car) => {
+        const principal = Number(car.dataset.price);
+        const monthly = monthlyRate === 0
+          ? principal / termMonths
+          : principal * monthlyRate / (1 - Math.pow(1 + monthlyRate, -termMonths));
+        const total = monthly * termMonths;
+        car.querySelector('.monthly').textContent = `${money.format(monthly)} / month`;
+        car.querySelector('.principal').textContent = money.format(principal);
+        car.querySelector('.total').textContent = money.format(total);
+        car.querySelector('.interest').textContent = money.format(total - principal);
+      });
+    }
+    aprInput.addEventListener('input', updateEstimates);
+    updateEstimates();
+  </script>
+</body>
+</html>
