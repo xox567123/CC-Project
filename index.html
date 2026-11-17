@@ -428,6 +428,24 @@
       font-weight: 900;
     }
 
+    .car-photo {
+      display: block;
+      width: min(100%, 760px);
+      max-height: 48vh;
+      margin: 22px auto 0;
+      object-fit: contain;
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      border-radius: 22px;
+      box-shadow: 0 18px 50px var(--shadow);
+      background: rgba(255, 255, 255, 0.55);
+    }
+
+    .photo-note {
+      margin-top: 14px;
+      color: var(--muted-brown);
+      font-size: clamp(15px, 1.5vw, 19px);
+    }
+
     .progress {
       position: fixed;
       z-index: 30;
@@ -676,6 +694,21 @@
         padding: 7px 10px;
         font-size: 16px;
       }
+
+      .car-photo {
+        max-height: 42vh;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
     }
   </style>
 </head>
@@ -714,13 +747,11 @@
 
     <!-- Slide 1 -->
     <section class="slide active">
-      <span class="slide-number">01 / 17</span>
-
+      <span class="slide-number">01 / 22</span>
       <div class="content">
         <div class="eyebrow">Career Connections</div>
         <h1>My Financial Future</h1>
         <p class="subtitle">A Personal Budget Plan</p>
-
         <div class="quote">
           Building a real plan around working in law enforcement.
         </div>
@@ -729,58 +760,42 @@
 
     <!-- Slide 2 -->
     <section class="slide">
-      <span class="slide-number">02 / 17</span>
-
+      <span class="slide-number">02 / 22</span>
       <div class="content">
         <div class="eyebrow">Career Goal</div>
         <h2>My Future Career</h2>
-
         <div class="card-grid two-columns">
           <div class="card">
             <strong>Career Field</strong>
-            <span>
-              My goal is to eventually go into law enforcement
-            </span>
+            <span>My goal is to eventually go into law enforcement.</span>
           </div>
-
           <div class="card">
-            <strong>Bettween 18 and 21</strong>
-            <span>
-              I would go into law enforcement.
-            </span>
+            <strong>Between 18 and 21</strong>
+            <span>I would go into law enforcement.</span>
           </div>
         </div>
-
         <div class="quote">
-         I would rather help other then chase money.
+          I would rather help others than chase money.
         </div>
       </div>
     </section>
 
     <!-- Slide 3 -->
     <section class="slide">
-      <span class="slide-number">03 / 17</span>
-
+      <span class="slide-number">03 / 22</span>
       <div class="content">
         <div class="eyebrow">Income Plan</div>
         <h2>Expected Monthly Income</h2>
-
         <div class="card-grid two-columns">
           <div class="card">
             <strong>Estimated Take-Home Pay</strong>
-            <span>
-              $6,666 per month after taxes and other payroll deductions.
-            </span>
+            <span>$6,666 per month after taxes and other payroll deductions.</span>
           </div>
-
           <div class="card">
             <strong>Income Priorities</strong>
-            <span>
-My goal is to live on $ 4,000 a month, giving me a good cushion on my budget.
-            </span>
+            <span>My goal is to live on $4,000 a month, giving me a good cushion in my budget.</span>
           </div>
         </div>
-
         <div class="quote budget-total">
           Monthly income goal: $6,666
         </div>
@@ -789,37 +804,24 @@ My goal is to live on $ 4,000 a month, giving me a good cushion on my budget.
 
     <!-- Slide 4 -->
     <section class="slide">
-      <span class="slide-number">04 / 17</span>
-
+      <span class="slide-number">04 / 22</span>
       <div class="content">
         <div class="eyebrow">Housing</div>
         <h2>Rent, Utilities, and Insurance</h2>
-
         <div class="card-grid">
           <div class="card">
             <strong>Rent</strong>
-            <span>
-              $1,100 monthly for a safe and affordable place to live.
-            </span>
+            <span>$1,100 monthly for a safe and affordable place to live.</span>
           </div>
-
           <div class="card">
             <strong>Utilities</strong>
-            <span>
-              $180 monthly for electricity, water, heating, and other basic
-              household services.
-            </span>
+            <span>$180 monthly for electricity, water, heating, and other basic household services.</span>
           </div>
-
           <div class="card">
             <strong>Renters Insurance</strong>
-            <span>
-              $25 monthly to help protect personal belongings and provide
-              liability coverage.
-            </span>
+            <span>$25 monthly to help protect personal belongings and provide liability coverage.</span>
           </div>
         </div>
-
         <div class="quote budget-total">
           Housing total: $1,305 per month
         </div>
@@ -828,35 +830,24 @@ My goal is to live on $ 4,000 a month, giving me a good cushion on my budget.
 
     <!-- Slide 5 -->
     <section class="slide">
-      <span class="slide-number">05 / 17</span>
-
+      <span class="slide-number">05 / 22</span>
       <div class="content">
         <div class="eyebrow">Transportation</div>
         <h2>Car and Transportation Costs</h2>
-
         <div class="card-grid">
           <div class="card">
             <strong>Car Payment</strong>
-            <span>
-              $350 monthly for a decent car.
-            </span>
+            <span>$350 monthly for a decent car.</span>
           </div>
-
           <div class="card">
             <strong>Car Insurance</strong>
-            <span>
-              $160 monthly for required auto insurance coverage.
-            </span>
+            <span>$160 monthly for required auto insurance coverage.</span>
           </div>
-
           <div class="card">
             <strong>Gas and Maintenance</strong>
-            <span>
-              $220 monthly for fuel, oil changes, repairs, and maintenance.
-            </span>
+            <span>$220 monthly for fuel, oil changes, repairs, and maintenance.</span>
           </div>
         </div>
-
         <div class="quote budget-total">
           Transportation total: $730 per month
         </div>
@@ -865,28 +856,20 @@ My goal is to live on $ 4,000 a month, giving me a good cushion on my budget.
 
     <!-- Slide 6 -->
     <section class="slide">
-      <span class="slide-number">06 / 17</span>
-
+      <span class="slide-number">06 / 22</span>
       <div class="content">
         <div class="eyebrow">Daily Needs</div>
         <h2>Food and Essentials</h2>
-
         <div class="card-grid two-columns">
           <div class="card">
             <strong>Food</strong>
-            <span>
-              $450 monthly for food.
-            </span>
+            <span>$450 monthly for food.</span>
           </div>
-
           <div class="card">
             <strong>Household Essentials</strong>
-            <span>
-              $150 monthly for needs.
-            </span>
+            <span>$150 monthly for needs.</span>
           </div>
         </div>
-
         <div class="quote budget-total">
           Food and essentials total: $600 per month
         </div>
@@ -895,28 +878,20 @@ My goal is to live on $ 4,000 a month, giving me a good cushion on my budget.
 
     <!-- Slide 7 -->
     <section class="slide">
-      <span class="slide-number">07 / 17</span>
-
+      <span class="slide-number">07 / 22</span>
       <div class="content">
         <div class="eyebrow">Communication</div>
         <h2>Cell Phone and Internet</h2>
-
         <div class="card-grid two-columns">
           <div class="card">
             <strong>Cell Phone</strong>
-            <span>
-              $80 monthly for a good phone plan.
-            </span>
+            <span>$80 monthly for a good phone plan.</span>
           </div>
-
           <div class="card">
             <strong>Internet</strong>
-            <span>
-              $70 monthly for internet.
-            </span>
+            <span>$70 monthly for internet.</span>
           </div>
         </div>
-
         <div class="quote budget-total">
           Communication total: $150 per month
         </div>
@@ -925,28 +900,20 @@ My goal is to live on $ 4,000 a month, giving me a good cushion on my budget.
 
     <!-- Slide 8 -->
     <section class="slide">
-      <span class="slide-number">08 / 17</span>
-
+      <span class="slide-number">08 / 22</span>
       <div class="content">
         <div class="eyebrow">Health</div>
         <h2>Health and Wellness</h2>
-
         <div class="card-grid two-columns">
           <div class="card">
             <strong>Health Costs</strong>
-            <span>
-              $250 monthly for health insurance and other medical expenses.
-            </span>
+            <span>$250 monthly for health insurance and other medical expenses.</span>
           </div>
-
           <div class="card">
             <strong>Why It Matters</strong>
-            <span>
-  Planning for this helps give me a cushion if something does go wrong.
-            </span>
+            <span>Planning for this helps give me a cushion if something does go wrong.</span>
           </div>
         </div>
-
         <div class="quote budget-total">
           Health budget: $250 per month
         </div>
@@ -955,28 +922,20 @@ My goal is to live on $ 4,000 a month, giving me a good cushion on my budget.
 
     <!-- Slide 9 -->
     <section class="slide">
-      <span class="slide-number">09 / 17</span>
-
+      <span class="slide-number">09 / 22</span>
       <div class="content">
         <div class="eyebrow">Personal Balance</div>
         <h2>Entertainment</h2>
-
         <div class="card-grid two-columns">
           <div class="card">
             <strong>Entertainment Budget</strong>
-            <span>
-              $150 monthly for entertainment.
-            </span>
+            <span>$150 monthly for entertainment.</span>
           </div>
-
           <div class="card">
             <strong>Responsible Spending</strong>
-            <span>
-              Entertainment is included, but I would pay all my bills first.
-            </span>
+            <span>Entertainment is included, but I would pay all my bills first.</span>
           </div>
         </div>
-
         <div class="quote budget-total">
           Entertainment budget: $150 per month
         </div>
@@ -985,28 +944,20 @@ My goal is to live on $ 4,000 a month, giving me a good cushion on my budget.
 
     <!-- Slide 10 -->
     <section class="slide">
-      <span class="slide-number">10 / 17</span>
-
+      <span class="slide-number">10 / 22</span>
       <div class="content">
         <div class="eyebrow">Long-Term Goals</div>
         <h2>Investments and Down Payment</h2>
-
         <div class="card-grid two-columns">
           <div class="card">
             <strong>Investments</strong>
-            <span>
-              $200 monthly toward retirement.
-            </span>
+            <span>$200 monthly toward retirement.</span>
           </div>
-
           <div class="card">
             <strong>Down Payment Fund</strong>
-            <span>
-              $200 monthly saved for a home.
-            </span>
+            <span>$200 monthly saved for a home.</span>
           </div>
         </div>
-
         <div class="quote budget-total">
           Long-term savings total: $400 per month
         </div>
@@ -1015,101 +966,63 @@ My goal is to live on $ 4,000 a month, giving me a good cushion on my budget.
 
     <!-- Slide 11 -->
     <section class="slide">
-      <span class="slide-number">11 / 17</span>
-
+      <span class="slide-number">11 / 22</span>
       <div class="content">
         <div class="eyebrow">Financial Protection</div>
         <h2>Rainy-Day Savings</h2>
-
         <div class="card-grid two-columns">
           <div class="card">
             <strong>Monthly Contribution</strong>
-            <span>
-              $200 monthly until I get a good bit of savings.
-            </span>
+            <span>$200 monthly until I have a good amount of savings.</span>
           </div>
-
           <div class="card">
             <strong>Purpose</strong>
-            <span>
-This can help in case something goes wrong.
-            </span>
+            <span>This can help in case something goes wrong.</span>
           </div>
         </div>
-
         <div class="quote">
-My goal is to have enough saved so I can survive up to 6 months without a job if something happens.
+          My goal is to have enough saved so I can survive up to six months without a job if something happens.
         </div>
       </div>
     </section>
 
     <!-- Slide 12 -->
     <section class="slide">
-      <span class="slide-number">12 / 17</span>
-
+      <span class="slide-number">12 / 22</span>
       <div class="content">
         <div class="eyebrow">Monthly Budget</div>
         <h2>Where My Money Goes</h2>
-
         <div class="story-map">
-          <div class="story-step">
-            <span>Income</span>
-            <p>$6,666 monthly take-home pay.</p>
-          </div>
-
-          <div class="story-step">
-            <span>Housing</span>
-            <p>$1,305 for rent, utilities, and renters insurance.</p>
-          </div>
-
-          <div class="story-step">
-            <span>Transportation</span>
-            <p>$730 for the car, insurance, gas, and maintenance.</p>
-          </div>
-
-          <div class="story-step">
-            <span>Daily Needs</span>
-            <p>$600 for food and essential purchases.</p>
-          </div>
-
-          <div class="story-step">
-            <span>Communication and Health</span>
-            <p>$400 for phone, internet, and health expenses.</p>
-          </div>
-
-          <div class="story-step">
-            <span>Goals and Balance</span>
-            <p>$950 for entertainment, investments, down payment, and rainy-day savings.</p>
-          </div>
+          <div class="story-step"><span>Income</span><p>$6,666 monthly take-home pay.</p></div>
+          <div class="story-step"><span>Housing</span><p>$1,305 for rent, utilities, and renters insurance.</p></div>
+          <div class="story-step"><span>Transportation</span><p>$730 for the car, insurance, gas, and maintenance.</p></div>
+          <div class="story-step"><span>Daily Needs</span><p>$600 for food and essential purchases.</p></div>
+          <div class="story-step"><span>Communication and Health</span><p>$400 for phone, internet, and health expenses.</p></div>
+          <div class="story-step"><span>Goals and Balance</span><p>$950 for entertainment, investments, down payment, and rainy-day savings.</p></div>
         </div>
       </div>
     </section>
 
     <!-- Slide 13 -->
     <section class="slide">
-      <span class="slide-number">13 / 17</span>
-
+      <span class="slide-number">13 / 22</span>
       <div class="content">
         <div class="eyebrow">Budget Check</div>
         <h2>My Monthly Total</h2>
-
         <div class="card-grid">
           <div class="card">
             <strong>Monthly Income</strong>
             <span>$6,666</span>
           </div>
-
           <div class="card">
             <strong>Monthly Expenses</strong>
             <span>$3,485</span>
           </div>
-
           <div class="card">
             <strong>Remaining Cushion</strong>
             <span>$3,015</span>
           </div>
         </div>
-
         <div class="quote budget-total">
           Take care of needs first and do other things second.
         </div>
@@ -1118,12 +1031,10 @@ My goal is to have enough saved so I can survive up to 6 months without a job if
 
     <!-- Slide 14 -->
     <section class="slide">
-      <span class="slide-number">14 / 17</span>
-
+      <span class="slide-number">14 / 22</span>
       <div class="content">
         <div class="eyebrow">Smart Choices</div>
         <h2>How I Will Stay on Track</h2>
-
         <div class="timeline">
           <span>Track spending weekly</span>
           <span>Use a monthly budget</span>
@@ -1131,7 +1042,6 @@ My goal is to have enough saved so I can survive up to 6 months without a job if
           <span>Automate savings</span>
           <span>Limit impulse purchases</span>
         </div>
-
         <div class="quote">
           A budget only works if I maintain it.
         </div>
@@ -1140,65 +1050,44 @@ My goal is to have enough saved so I can survive up to 6 months without a job if
 
     <!-- Slide 15 -->
     <section class="slide">
-      <span class="slide-number">15 / 17</span>
-
+      <span class="slide-number">15 / 22</span>
       <div class="content">
         <div class="eyebrow">Career Connection</div>
         <h2>How My Career Supports My Plan</h2>
-
         <div class="card-grid two-columns">
           <div class="card">
             <strong>Reliable Income</strong>
-            <span>
-My career gives me enough money to live a good life, though I have to plan to build a fund in case of emergency.  
-            </span>
+            <span>My career gives me enough money to live a good life, though I have to plan to build a fund in case of emergency.</span>
           </div>
-
           <div class="card">
             <strong>Future Growth</strong>
-            <span>
-              Experience and promotions can increase
-              my ability to save and invest.
-            </span>
+            <span>Experience and promotions can increase my ability to save and invest.</span>
           </div>
         </div>
-
         <div class="quote">
-   My carrer goal would give me a good future.
+          My career goal would give me a good future.
         </div>
       </div>
     </section>
 
     <!-- Slide 16 -->
     <section class="slide">
-      <span class="slide-number">16 / 17</span>
-
+      <span class="slide-number">16 / 22</span>
       <div class="content">
         <div class="eyebrow">Future Goals</div>
         <h2>What I Want to Accomplish</h2>
-
         <div class="card-grid">
           <div class="card">
             <strong>Short Term</strong>
-            <span>
-              Pay bills on time, avoid unnecessary debt, and build a starter
-              emergency fund.
-            </span>
+            <span>Pay bills on time, avoid unnecessary debt, and build a starter emergency fund.</span>
           </div>
-
           <div class="card">
             <strong>Medium Term</strong>
-            <span>
-I wish to be a sergeant and have a home.
-            </span>
+            <span>I wish to be a sergeant and have a home.</span>
           </div>
-
           <div class="card">
             <strong>Long Term</strong>
-            <span>
-              Own a home, invest consistently, and have enough savings to feel
-              financially secure.
-            </span>
+            <span>Own a home, invest consistently, and have enough savings to feel financially secure.</span>
           </div>
         </div>
       </div>
@@ -1206,19 +1095,13 @@ I wish to be a sergeant and have a home.
 
     <!-- Slide 17 -->
     <section class="slide">
-      <span class="slide-number">17 / 17</span>
-
+      <span class="slide-number">17 / 22</span>
       <div class="content">
         <div class="eyebrow">Final Reflection</div>
         <h2>My Financial Future</h2>
-
         <div class="review-box">
           <h3>Career Connections Project</h3>
-
-          <p>
-    This is to build a safe life and secure life for when I am older.
-          </p>
-
+          <p>This is to build a safe and secure life for when I am older.</p>
           <div class="quote budget-total">
             Earn responsibly. Spend wisely. Save consistently.
           </div>
@@ -1228,12 +1111,10 @@ I wish to be a sergeant and have a home.
 
     <!-- Slide 18 -->
     <section class="slide">
-      <span class="slide-number">18 / 20</span>
-
+      <span class="slide-number">18 / 22</span>
       <div class="content">
         <div class="eyebrow">Normal Budget</div>
         <h2>Normal Budget</h2>
-
         <div class="story-map">
           <div class="story-step"><span>Income</span><p>Monthly: $6,613 · Annual: $79,356</p></div>
           <div class="story-step"><span>Home</span><p>Monthly: $2,393.41 · Annual: $28,720.92</p></div>
@@ -1252,19 +1133,17 @@ I wish to be a sergeant and have a home.
 
     <!-- Slide 19 -->
     <section class="slide">
-      <span class="slide-number">19 / 20</span>
-
+      <span class="slide-number">19 / 22</span>
       <div class="content">
         <div class="eyebrow">Military Budget</div>
         <h2>Military Budget</h2>
-
         <div class="story-map">
           <div class="story-step"><span>Car Insurance</span><p>$460</p></div>
           <div class="story-step"><span>Phone</span><p>$68.88</p></div>
           <div class="story-step"><span>Car</span><p>$227</p></div>
           <div class="story-step"><span>Gas</span><p>$256</p></div>
           <div class="story-step"><span>Investment</span><p>$400</p></div>
-          <div class="story-step"><span>Rainy Day Saving</span><p>$500</p></div>
+          <div class="story-step"><span>Rainy-Day Savings</span><p>$500</p></div>
           <div class="story-step"><span>Down Payment</span><p>$1,167</p></div>
           <div class="story-step"><span>Essentials</span><p>$1,011.88</p></div>
           <div class="story-step"><span>Total</span><p>$3,078.88</p></div>
@@ -1274,12 +1153,10 @@ I wish to be a sergeant and have a home.
 
     <!-- Slide 20 -->
     <section class="slide">
-      <span class="slide-number">20 / 20</span>
-
+      <span class="slide-number">20 / 22</span>
       <div class="content">
         <div class="eyebrow">Furnishing Costs</div>
         <h2>Furnishing Costs</h2>
-
         <div class="story-map">
           <div class="story-step"><span>Table</span><p>$430</p></div>
           <div class="story-step"><span>Storage</span><p>$200</p></div>
@@ -1295,10 +1172,51 @@ I wish to be a sergeant and have a home.
           <div class="story-step"><span>Blanket</span><p>$35</p></div>
           <div class="story-step"><span>Comforter</span><p>$100</p></div>
           <div class="story-step"><span>Cookware</span><p>$100</p></div>
-          <div class="story-step"><span>MicroWave</span><p>$200</p></div>
+          <div class="story-step"><span>Microwave</span><p>$200</p></div>
           <div class="story-step"><span>Coffee Table</span><p>$300</p></div>
           <div class="story-step"><span>Total</span><p>$5,575</p></div>
+          <div class="story-step"><span>36-Month Payment</span><p>About $154.86 per month at 0% interest.</p></div>
         </div>
+      </div>
+    </section>
+
+    <!-- Slide 21: 2017 Ford Focus -->
+    <section class="slide">
+      <span class="slide-number">21 / 22</span>
+      <div class="content">
+        <div class="eyebrow">Vehicle Option 1</div>
+        <h2>2017 Ford Focus SEL</h2>
+        <img
+          class="car-photo"
+          src="https://go.superhuman.com/attachments/lC5TkVi2QwuIJk9rP17wTA"
+          alt="Silver 2017 Ford Focus SEL listed for $9,900"
+        />
+        <div class="quote budget-total">
+          Listed price: $9,900
+        </div>
+        <p class="photo-note">
+          Estimated 36-month payment: $275.00 per month at 0% interest, with no down payment or fees.
+        </p>
+      </div>
+    </section>
+
+    <!-- Slide 22: Porsche 911 -->
+    <section class="slide">
+      <span class="slide-number">22 / 22</span>
+      <div class="content">
+        <div class="eyebrow">Vehicle Option 2</div>
+        <h2>Porsche 911</h2>
+        <img
+          class="car-photo"
+          src="https://go.superhuman.com/attachments/AFftJbKMTgifMyaw2BbGBA"
+          alt="Pale green Porsche 911 listed for $229,555"
+        />
+        <div class="quote budget-total">
+          Listed price: $229,555
+        </div>
+        <p class="photo-note">
+          Estimated 36-month payment: $6,376.53 per month at 0% interest, with no down payment or fees.
+        </p>
       </div>
     </section>
   </div>
@@ -1314,7 +1232,8 @@ I wish to be a sergeant and have a home.
     slides.forEach((slide, index) => {
       const slideNumber = slide.querySelector(".slide-number");
       if (slideNumber) {
-        slideNumber.textContent = `${String(index + 1).padStart(2, "0")} / ${slides.length}`;
+        slideNumber.textContent =
+          `${String(index + 1).padStart(2, "0")} / ${slides.length}`;
       }
     });
 
@@ -1330,7 +1249,6 @@ I wish to be a sergeant and have a home.
     function formatTime(totalSeconds) {
       const minutes = Math.floor(totalSeconds / 60);
       const seconds = totalSeconds % 60;
-
       return `${minutes}:${String(seconds).padStart(2, "0")}`;
     }
 
@@ -1351,7 +1269,6 @@ I wish to be a sergeant and have a home.
 
     function startTimer() {
       clearInterval(timerInterval);
-
       remainingSeconds = TIMER_DURATION;
       presentationTimer.classList.remove("warning", "finished");
       presentationTimer.classList.add("visible");
@@ -1381,10 +1298,7 @@ I wish to be a sergeant and have a home.
       });
 
       slides[index].classList.add("active");
-
-      progress.style.width =
-        `${((index + 1) / slides.length) * 100}%`;
-
+      progress.style.width = `${((index + 1) / slides.length) * 100}%`;
       currentSlide = index;
     }
 
@@ -1398,7 +1312,6 @@ I wish to be a sergeant and have a home.
 
     function startAutoPlay() {
       clearInterval(autoPlay);
-
       // 150 seconds per slide.
       autoPlay = setInterval(nextSlide, 150000);
     }
